@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Launch-readiness consistency pass. No public API or behaviour changes; safe
+for a patch release. Target: **v0.6.1 — MCP Context Gateway (positioning)**.
+
+### Fixed
+
+- **`make test` hardened against editable-install path resolution and
+  PATH ambiguity.** Two changes: (a) added `pythonpath = ["src"]` to
+  `[tool.pytest.ini_options]` in `pyproject.toml` so `pytest` can
+  always resolve `contextweaver` regardless of the editable-install
+  mode (`compat` vs `strict`); (b) changed the `test` target in
+  `Makefile` from `pytest …` to `python -m pytest …`, the
+  [pytest-recommended invocation](https://docs.pytest.org/en/stable/explanation/goodpractices.html)
+  that pins the interpreter to the current `python` instead of
+  whatever `pytest` binary happens to be first on `PATH`. Neither
+  change affects behaviour in a clean CI environment. Issue #238.
+- **Version metadata drift across `__init__.py`, `CITATION.cff`, and
+  `pyproject.toml` resolved.** `src/contextweaver/__init__.py` previously
+  hard-coded `__version__ = "0.3.0"` while `pyproject.toml` declared
+  `0.6.0` and `CITATION.cff` declared `0.4.0`. `__version__` is now derived
+  at import time from package metadata via
+  `importlib.metadata.version("contextweaver")`, so the three sources of
+  truth can no longer drift. `CITATION.cff` is aligned to the current
+  released line (v0.6.0, 2026-05-17). Issues #237, #247.
+
+### Changed
+
+- **Public positioning aligned to "context firewall and tool router for
+  tool-heavy AI agents"** across the README first screen, the docs
+  landing page (`docs/index.md`), the `pyproject.toml` `description`
+  field, the `CITATION.cff` abstract, and the package docstring in
+  `src/contextweaver/__init__.py`. The existing "phase-specific,
+  budget-aware context engineering" framing is retained as the
+  technical second paragraph everywhere it appeared, so technical depth
+  is unchanged. Issues #240, #248.
+- **`pyproject.toml` keywords** extended with `context-firewall`,
+  `tool-router`, and `mcp-gateway` for PyPI / GitHub discovery. Issue #241.
+- **Test-count claims updated** from "600+ tests" to "1100+ tests" in
+  the README first screen, the "Why Trust contextweaver?" section, and
+  the v0.1 roadmap entry. `pytest --collect-only -q` currently reports
+  1151 collected.
+- **Stale "zero runtime dependencies" claim corrected** in `docs/index.md`,
+  `README.md` (design rationale table + follow-up prose), and
+  `docs/architecture.md`. The invariant in
+  `docs/agent-context/invariants.md` is updated to reflect the explicit
+  policy already documented inline in `pyproject.toml` (lines 39–50):
+  core deps are kept small and audited, but were deliberately expanded
+  in v0.4 (MCP / `jsonschema`) and v0.5 (`typer` / `rich`) to drop the
+  guarded-import dance for load-bearing surfaces. No behaviour or
+  dependency change in this release — only the docs catching up to
+  reality.
+
 ## [0.6.0] - 2026-05-17
 
 ### Fixed

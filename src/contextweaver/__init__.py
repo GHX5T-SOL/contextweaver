@@ -1,4 +1,4 @@
-"""contextweaver — dynamic context management for tool-using AI agents.
+"""contextweaver — context firewall and tool router for tool-heavy AI agents.
 
 Two integrated engines:
 
@@ -19,6 +19,9 @@ Quick start::
 """
 
 from __future__ import annotations
+
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _pkg_version
 
 from contextweaver import config, envelope, exceptions, profiles, protocols, types
 from contextweaver._utils import BM25Scorer, FuzzyScorer, TfIdfScorer, jaccard
@@ -108,7 +111,11 @@ from contextweaver.types import (
     ViewSpec,
 )
 
-__version__ = "0.3.0"
+try:
+    __version__ = _pkg_version("contextweaver")
+except PackageNotFoundError:
+    # Running from a source tree without an installed distribution.
+    __version__ = "0.0.0+local"
 __all__ = [
     # sub-modules
     "config",

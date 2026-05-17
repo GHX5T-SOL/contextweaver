@@ -3,10 +3,10 @@ cff-version: 1.2.0
 message: "If you use contextweaver in published work, please cite it as below."
 title: contextweaver
 abstract: >-
-  contextweaver is a Python library for dynamic context management for
-  tool-using AI agents. It provides phase-specific, budget-aware context
-  compilation with a context firewall, plus bounded-choice routing over
-  large tool catalogs via DAG and beam search.
+  contextweaver is a context firewall and tool router for tool-heavy AI
+  agents. It provides phase-specific, budget-aware context compilation with
+  a context firewall, plus bounded-choice routing over large tool catalogs
+  via DAG and beam search.
 type: software
 authors:
   - family-names: Santos
@@ -18,8 +18,8 @@ license: Apache-2.0
 # `version` and `date-released` must be updated by the release process when
 # tagging a new release (see CONTRIBUTING.md / RELEASING). The values below
 # track the most recent tagged release on PyPI.
-version: 0.4.0
-date-released: "2026-05-16"
+version: 0.6.0
+date-released: "2026-05-17"
 # A real DOI will be added once a Zenodo (or equivalent) archive of a tagged
 # release is published. Omitting the `identifiers` block here keeps the file
 # compatible with strict CFF validators that reject placeholder DOIs.

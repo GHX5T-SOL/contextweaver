@@ -14,6 +14,7 @@ for a production agent, you are in the right place.
 
 | Architecture | What it shows | Size |
 |---|---|---|
+| [MCP Context Gateway](mcp_context_gateway.md) | 60-tool MCP-style gateway, 5 `ChoiceCards`, lazy schema hydration, firewall on a 16 KB upstream result, artifact-backed answer-phase prompt | ~240 lines + YAML catalog |
 | [Slack ops bot](slack_ops_bot.md) | ~50 internal tools, multi-turn investigations, firewall on log/grep outputs, persistent fact memory across conversations | ~250 lines + YAML catalog |
 
 ## How each architecture is structured
